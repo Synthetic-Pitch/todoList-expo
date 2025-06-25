@@ -31,22 +31,22 @@ const Header = () => {
     return (
         <View className='h-[200px] bg-[#97B9DF] px-8 rounded-br-[50px] flex-row items-center gap-6'>
             { selectedImage ? (
-                <View className='mt-4 relative justify-center h-[100px]'>
-                    <Image 
-                        source={{ uri: selectedImage }}
-                        className='w-[100px] h-[100px] rounded-lg'
-                        resizeMode="cover"
-                        style={{
-                            borderRadius:100,zIndex:1
-                        }}
-                    />
-                    <Pressable onPress={pickImage} className='absolute bottom-0 bg-[#97B9DF] z-10 rounded-md pr-1'>
-                        <Image
-                            source={require('../../assets/images/camera.png')}
-                            className='z-10 h-7 w-7'
+                    <View className='mt-4 relative justify-center h-[100px]'>
+                        <Image 
+                            source={{ uri: selectedImage }}
+                            className='w-[100px] h-[100px] rounded-lg'
+                            resizeMode="cover"
+                            style={{
+                                borderRadius:100,zIndex:1
+                            }}
                         />
-                    </Pressable>
-                </View>
+                        <Pressable onPress={pickImage} className='absolute bottom-0 bg-[#97B9DF] z-10 rounded-md pr-1'>
+                            <Image
+                                source={require('../assets/images/camera.png')}
+                                className='z-10 h-7 w-7'
+                            />
+                        </Pressable>
+                    </View>
                 ):(
                     <Pressable 
                         onPress={pickImage} 
@@ -56,10 +56,10 @@ const Header = () => {
                     </Pressable>
                 )
             }
-
-            <View>
-                <Text className='text-xl font-bold'>Marked</Text>
-                <Text className='text-xl font-bold text-white'>{100}pts</Text>
+            
+            <View className='mt-6'>
+                <Text className='text-2xl font-protestriot'>Marked</Text>
+                <Text className='text-xl font-poppins text-white'>{100}pts</Text>
             </View>
 
         </View>
