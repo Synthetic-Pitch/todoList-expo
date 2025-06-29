@@ -16,7 +16,9 @@ const MapItem = () => {
 
             <Pressable onPress={readData} className='p-4 bg-[skyblue] '><Text>get data</Text></Pressable>
              <Pressable onPress={resetData} className='p-4 bg-[skyblue] '><Text>reset data</Text></Pressable>
-            <View className='absolute bottom-0 left-0 bg-[red]'><Text>hello</Text></View>
+            <View className='absolute bottom-0 left-0 p-4 m-4 w-full bg-[pink] items-end'>
+                <Text className='bg-[#97B9DF] w-[60px] '>X</Text>
+            </View>
 
             
             

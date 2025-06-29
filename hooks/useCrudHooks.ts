@@ -26,9 +26,7 @@ export default function UseCrudHooks(){
                     ...parsed, // spreads { todo: '...', color: '...' }
                 };
             }).filter(Boolean); // removes any nulls (if value was null)
-
             console.log(todos);
-            
             return todos;
         } catch (e) {
             console.error('Error reading AsyncStorage data:', e);
