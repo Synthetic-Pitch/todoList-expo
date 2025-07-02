@@ -12,11 +12,11 @@ export default function RootLayout() {
     ProtestRevolution:require('../assets/fonts/ProtestRevolution-Regular.ttf'),
     ProtestRiot: require('../assets/fonts/ProtestRiot-Regular.ttf')
   });
-
+  
   if (!fontsLoaded) {
     return <Text>Loading fonts...</Text>; // You can also use a spinner
   }
-
+  
   return (
     <React.Fragment>
       <StatusBar style="dark"/>

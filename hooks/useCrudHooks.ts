@@ -1,12 +1,24 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from 'react';
 
+type TodoItem = {
+    key: string;
+    todo: string;
+    color: string;
+};
+
 export default function UseCrudHooks(){
-    const [todo,setTodos] = useState();
-    const createData = async ({todo,color}:{todo:string,color:string}) => {
+    const [todo, setTodos] = useState<TodoItem[]>([]);
+
+    const createData = async (
+            {todo,color}
+            :
+            {todo:string,color:string}
+        ) => {
         const randKey = (Math.floor(Math.random() * 900000)+100000).toString();
+        const date = new Date().toLocaleString();
         try{
-            await AsyncStorage.setItem(randKey, JSON.stringify({todo,color}));
+            await AsyncStorage.setItem(randKey, JSON.stringify({todo,color,date}));
         }catch(e){
             console.error(e)
             console.log('Error occured while creating data in AsyncStorage')
@@ -17,16 +29,19 @@ export default function UseCrudHooks(){
         try {
             const keys = await AsyncStorage.getAllKeys();
             const rawTodos = await AsyncStorage.multiGet(keys);
-            
-            const todos = rawTodos.map(([key, value]) => {
+            const todos = rawTodos
+            .map(([key, value]) => {
                 if (!value) return null;
                 const parsed = JSON.parse(value);
                 return {
                     key,
-                    ...parsed, // spreads { todo: '...', color: '...' }
+                    ...parsed,
                 };
-            }).filter(Boolean); // removes any nulls (if value was null)
+            })
+            .filter(Boolean);
             console.log(todos);
+            
+            setTodos(todos); // <-- update state here
             return todos;
         } catch (e) {
             console.error('Error reading AsyncStorage data:', e);
@@ -37,12 +52,12 @@ export default function UseCrudHooks(){
         try{
             await AsyncStorage.clear();
         }catch(e){
-            console.error(e)
+            console.error(e);
             console.log("Error occured while performing reset All data")
         }
     }
 
     return{
-        createData,readData,resetData
+        createData,readData,resetData,todo
     }
 }
