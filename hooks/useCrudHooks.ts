@@ -56,8 +56,16 @@ export default function UseCrudHooks(){
             console.log("Error occured while performing reset All data")
         }
     }
+    const importProfile = async () => {
+        try{
+            
+        }catch(e){
+            console.error(e);
+            console.log("Error occured while performing reset All data");
+        }
+    }
 
     return{
-        createData,readData,resetData,todo
+        createData,readData,resetData,todo,importProfile
     }
 }

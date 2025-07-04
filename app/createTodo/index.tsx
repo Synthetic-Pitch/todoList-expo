@@ -1,9 +1,19 @@
 import Header from '@/components/headers';
+import { useState } from 'react';
 import { Dimensions, Pressable, Text, TextInput, View } from "react-native";
 import { Shadow } from "react-native-shadow-2";
 const screenWidth = Dimensions.get("window").width;
 
+
+
 const Page = () => {
+  const [selected,setSelected] = useState<number | null>(null)
+
+  const Colors = [
+    '#DFCCA7','#F2BBEE','#F2BBBC','#BFF2BB','#F2D6BB'
+  ];
+
+
   return (
    <View className="flex-1 bg-[#E5E5E5] relative">
       <Shadow
@@ -50,18 +60,24 @@ const Page = () => {
         <View className='px-4'>
           <Text className='font-poppins text-[gray]'>color</Text>
           <View className='flex-row gap-2'>
-              <Pressable className='bg-[#DFCCA7] h-10 w-10 rounded-full'/>
-              <Pressable className='bg-[#F2BBEE] h-10 w-10 rounded-full'/>
-              <Pressable className='bg-[#F2BBBC] h-10 w-10 rounded-full'/>
-              <Pressable className='bg-[#BFF2BB] h-10 w-10 rounded-full'/>
-              <Pressable className='bg-[#F2D6BB] h-10 w-10 rounded-full'/>
+              {
+                Colors.map((color,index)=>(
+                  <Pressable 
+                    key={index} 
+                    style={{height:28,width:28,backgroundColor:color,borderRadius:50,borderColor:'gray',borderWidth: selected === index ? 1.5 : 0 }}
+                    onPress={()=>setSelected(index)}
+                  /> 
+                ))
+              }
           </View>
         </View>
+        <View className='absolute bottom-0 bg-[red] h-20 w-20'>
 
+        </View>
         <View
           className='h-[44.8px] w-full bg-black absolute bottom-0'
-        >
-        </View>
+        />
+        
       </View>
     </View>
   )

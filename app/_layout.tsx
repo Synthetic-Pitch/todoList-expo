@@ -1,8 +1,11 @@
+import GlobalFooter from '@/components/GlobalFooter';
+import GlobalHeader from '@/components/GlobalHeader';
 import { useFonts } from 'expo-font';
-import { Stack } from "expo-router";
+import { Slot } from 'expo-router';
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { Text } from 'react-native';
+import { View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import "../global.css";
 
 export default function RootLayout() {
@@ -14,17 +17,18 @@ export default function RootLayout() {
   });
   
   if (!fontsLoaded) {
-    return <Text>Loading fonts...</Text>; // You can also use a spinner
+    console.log('fonts not loaded');
   }
   
   return (
-    <React.Fragment>
+    <SafeAreaProvider>
       <StatusBar style="dark"/>
-      <Stack 
-       screenOptions={{
-        headerShown:false
-       }}
-      />
-    </React.Fragment>
+      <View style={{flex:1,backgroundColor:"#E5E5E5"}}>
+        <GlobalHeader></GlobalHeader>
+        <Slot></Slot>
+        <GlobalFooter/>
+      </View>
+      
+    </SafeAreaProvider>
   )
 }
