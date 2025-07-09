@@ -1,27 +1,25 @@
-import UseCrudHooks from '@/hooks/useCrudHooks';
-import { useEffect } from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { useQuery } from '@tanstack/react-query';
+import { StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Shadow } from 'react-native-shadow-2';
-
 const GlobalHeader = () => {
     const insets = useSafeAreaInsets();
-    const { readData } = UseCrudHooks();
-
-    useEffect(()=>{
-        console.log(readData,'hi');
-    },[readData])
-
+   
+    const {data,error,isLoading,refetch} = useQuery({
+        queryKey:['get'],
+        queryFn:async ()=>{
+            const res = await fetch('https://gzqijrdunlfaajngqnxh.supabase.co/functions/v1/hello-world');
+            const data = await res.json();
+            return data
+        }
+    });
+    
     return (
         <Shadow
             style={{width:'100%'}}
         >   
             <View style={[styles.container,{paddingTop:insets.top}]}>
-                <View style={styles.user_profile}>
-                    <Image
-
-                    />
-                </View>
+                <View style={styles.user_profile}></View>
             </View>
         </Shadow>
     )
@@ -42,7 +40,7 @@ const styles = StyleSheet.create({
     user_profile:{
         height:90,
         width:90,
-        backgroundColor:'pink',
+        backgroundColor:'#D9D9D9',
         borderRadius:50
     }
 })
